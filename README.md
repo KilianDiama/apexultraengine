@@ -24,34 +24,7 @@ A lightweight, asynchronous DAG engine for Python with caching, retries, telemet
 - **Type Validation**  
   Optional Pydantic validation for task outputs.
 
----
 
-## Installation
-
-
-git clone https://github.com/KilianDiama/apexultraengine.git
-cd apexultraengine
-pip install -r requirements.txt
-Usage Example
-import asyncio
-from apexultraengine import ApexUltraEngine
-
-engine = ApexUltraEngine()
-
-@engine.step()
-async def get_data():
-    return {"val": 42}
-
-@engine.step()
-def process(get_data: dict):
-    return get_data["val"] * 2
-
-async def run():
-    async for node, out, telemetry in engine.stream({}):
-        print(f"{node} -> {out} ({telemetry.status})")
-    await engine.shutdown()
-
-asyncio.run(run())
 License & Commercial Use
 
 Personal / Educational Use: Free and open-source. You can use, modify, and distribute for non-commercial purposes.
