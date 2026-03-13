@@ -1,44 +1,81 @@
-# ApexUltraEngine
+ApexUltraEngine
 
-A lightweight, asynchronous DAG engine for Python with caching, retries, telemetry, and type validation.
+An asynchronous DAG engine for Python – orchestrate tasks reliably with caching, retries/backoff, and telemetry.
 
----
+🔥 Features
 
-## Features
+✅ Define DAGs (Directed Acyclic Graphs) to orchestrate tasks.
 
-- **Asynchronous & Parallel Execution**  
-  Run tasks concurrently while respecting dependencies using asyncio and semaphores.
+✅ Asynchronous and parallel task execution.
 
-- **Dependency Management**  
-  Automatic topological sorting of tasks with dynamic dependency resolution.
+✅ Configurable retries & backoff.
 
-- **Caching**  
-  Results are cached with TTL support to avoid recalculations.
+✅ Result caching to avoid unnecessary recomputation.
 
-- **Retries & Backoff**  
-  Automatic retries with exponential backoff for robust execution.
+✅ Type validation and robust error handling.
 
-- **Telemetry & Observability**  
-  Track latency, status, retries, cache hits, and errors for each task.
+✅ Built-in telemetry & logging for workflow monitoring.
 
-- **Type Validation**  
-  Optional Pydantic validation for task outputs.
+✅ Easily extensible and integrable with existing Python projects.
 
+🚀 Installation
+pip install apexultraengine
 
-License & Commercial Use
+The package is available via PyPI and GitHub (or you can clone the repository).
 
-Personal / Educational Use: Free and open-source. You can use, modify, and distribute for non-commercial purposes.
+📝 Basic Usage
+from apexultraengine import DAG, Task
 
-Commercial Use: Any use generating revenue requires a commercial license.
+# Define a task
+class HelloTask(Task):
+    async def run(self):
+        print("Hello, ApexUltraEngine!")
+        return "Done"
 
-Royalties range from 8% to 30% depending on revenue and usage.
+# Create a DAG
+dag = DAG("ExampleDAG")
+dag.add_task(HelloTask())
 
-Contact the author to obtain a license: [your email/contact info].
+# Run the DAG
+dag.run()
+Advanced Example with Dependencies
+class TaskA(Task):
+    async def run(self):
+        return 1
 
-Contributing
+class TaskB(Task):
+    async def run(self, input_a):
+        return input_a + 2
 
-Contributions are welcome! Please submit issues or pull requests for bug fixes and improvements.
+dag = DAG("AdvancedDAG")
+dag.add_task(TaskA(), name="A")
+dag.add_task(TaskB(), name="B", dependencies=["A"])
+dag.run()
+⚙️ Configuration
 
+Retries & Backoff – configure the number of attempts and backoff interval per task.
+
+Cache – enable caching for expensive computations.
+
+Logging – full logging for every execution step.
+
+🧩 Contribution
+
+Want to contribute?
+
+Fork the repository
+
+Create a branch (git checkout -b feature/my-feature)
+
+Commit your changes (git commit -am 'Add new feature')
+
+Push (git push origin feature/my-feature)
+
+Open a Pull Request
+
+📄 License
+
+ApexUltraEngine is under a commercial license. Contact the owner for production use or redistribution.
 Disclaimer
 
 This software is provided "as is" without any warranty. The author is not liable for damages arising from its use.
