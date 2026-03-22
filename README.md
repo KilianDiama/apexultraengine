@@ -1,3 +1,4 @@
+⚡ Engineered by Kiliandiama | The Diama Protocol [10/10] | All rights reserved.
 ApexUltraEngine
 
 An asynchronous DAG engine for Python – orchestrate tasks reliably with caching, retries/backoff, and telemetry.
